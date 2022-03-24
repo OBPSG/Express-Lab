@@ -1,0 +1,1 @@
+alert("Hello from a JS file served by Express.useStatic()!")
