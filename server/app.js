@@ -14,6 +14,8 @@ app.use((req, res, next) => {
     next();
 });
 
+let posts = []
+
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(express.static(path.join(__dirname, "../public")));
@@ -28,9 +30,11 @@ app.post("/formsubmissions", (req, res) => {
 
     let filePath = path.join (__dirname, "/posts.json");
 
-    fs.appendFileSync(filePath, JSON.stringify(Post));
+    posts.unshift(Post);
+
+    fs.writeFileSync(filePath, JSON.stringify(posts));
     
-    res.send("Your post has been received!")
+    res.send("Your post has been received!");
 });
 
 app.listen(3000);
